@@ -1,0 +1,72 @@
+@charset "utf-8";
+/**
+ * @author  :   lyc
+ * @created :   2017/07/14
+ * @version :   v1.0
+ * @desc    :   主要是定义了系统样式的变量
+ */
+$background-color: #fff;
+$background-color-hover: #ccc;
+$font-color: #333;
+$item-tabs-item-hover: #20A0FF;
+$loading-background: rgba(221, 225, 227, .4);
+$scrollbar-thumb: rgba(221, 225, 227, 1);
+$scrollbar-button: rgba(238, 238, 238, 1);
+$header-background: #4d637b;
+$sub-munu-background: rgba(134, 160, 188, 1);
+$header-border-bottom: rgba(169, 194, 221, 1);
+$el-menu-hover: rgba(110, 180, 252, 1);
+$theme-select-background: rgba(238, 238, 238, 1);
+
+$card-border-width: 1px;
+$card-border-color: rgb(43, 65, 111);
+$card-border-radius: 5px;
+$card-border: $card-border-width $card-border-color solid;
+
+$card-header-background: #dde1e3;
+$card-header-color: $font-color;
+$card-header-height: 45px;
+$card-header-bottom-color: #1D90E6;
+$card-header-bottom: 1px solid $card-header-bottom-color;
+
+$card-body-background-color: #fff;
+$el-row-margin-bottom: 0px;
+
+$dialog-background-color: rgba(36, 85, 162, 0.9);
+$user-menu-bgcolor: #fff;
+$user-menu-hover: #ccc;
+$user-menu-border-color: #fff;
+
+/* @article list 样式变量
+----------------------------------------------------------------*/
+$article-bottom-background-color: #eee;
+$article-title-hover: #FF7F27;
+$collapse-border: 1px solid #ccc;
+$input-background: #fff;
+$input-border: 1px solid #ccc;
+
+/* @accident list 样式变量
+----------------------------------------------------------------*/
+$accident-list-background-color: #fff;
+$accident-list-border-color: #ccc;
+
+/* 后台管理 样式变量
+----------------------------------------------------------------*/
+$manage-table-border-color: #ccc;
+$manage-table-border-bottom-color: #ccc;
+$manage-table-header-color: #ccc;
+$manage-table-input-border: 1px solid #ccc;
+$manage-table-border-bdcolor: #ccc;
+$manage-input-bgcolor: #fff;
+$manage-table-current-bgcolor: #edf7ff;
+$manage-keywords-input-bgcolor: #eef1f6;
+$manage-dialog-bgcolor: #fff;
+
+/* 生成报告 样式变量
+----------------------------------------------------------------*/
+$report-readPortSubTitle-color: #666;
+
+/* 详情评论 样式变量
+----------------------------------------------------------------*/
+$commentList-bgColor: #fff;
+
