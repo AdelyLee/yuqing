@@ -41,7 +41,7 @@ export default [
     path: '/',
     name: '全景舆情',
     component: home,
-    // redirect: '/index',
+    redirect: '/index',
     menuShow: true,
     iconCls: 'iconfont icon-index', // 图标样式class
     children: [
