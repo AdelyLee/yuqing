@@ -30,6 +30,7 @@ const detail = r => require.ensure([], () => r(require('../page/detail/index')),
 const monitor = r => require.ensure([], () => r(require('../page/monitor/index')), 'monitor')
 const warningDetail = r => require.ensure([], () => r(require('../page/monitor/details')), 'warningDetail')
 const accidentMonitor = r => require.ensure([], () => r(require('../page/monitor/accident')), 'accidentMonitor')
+
 export default [
   {
     path: '/login',
@@ -40,7 +41,7 @@ export default [
     path: '/',
     name: '全景舆情',
     component: home,
-    redirect: '/index',
+    // redirect: '/index',
     menuShow: true,
     iconCls: 'iconfont icon-index', // 图标样式class
     children: [

@@ -24,35 +24,13 @@
             <el-form :model="condition" ref="condition" label-width="80px">
               <el-row class="srarch-screen">
                 <el-col :span="12">
-                  <el-form-item label="关键词">
-                    <el-input type="textarea" v-model="condition.mustWord" :autosize="true"
-                              placeholder="关键词之间用@隔开"></el-input>
-                  </el-form-item>
-                </el-col>
-                <el-col :span="12">
-                  <el-form-item label="同现词">
-                    <el-input type="textarea" v-model="condition.shouldWord" :autosize="true"
-                              placeholder="同现词之间用@隔开"></el-input>
-                  </el-form-item>
-                </el-col>
-              </el-row>
-              <el-row class="srarch-screen">
-                <el-col :span="12">
-                  <el-form-item label="排除词">
-                    <el-input type="textarea" v-model="condition.mustNotWord" :autosize="true"
-                              placeholder="排除词之间用@隔开"></el-input>
-                  </el-form-item>
-                </el-col>
-                <el-col :span="12">
                   <el-form-item label="信息排序">
-                    <el-radio-group v-model="condition.direction" @change="changeSort">
-                      <el-radio label="DESC">时间降序</el-radio>
-                      <el-radio label="ASC">时间升序</el-radio>
+                    <el-radio-group v-model="condition.direction">
+                      <el-radio label="adate">时间降序</el-radio>
+                      <el-radio label="deathnumber">死亡人數降序</el-radio>
                     </el-radio-group>
                   </el-form-item>
                 </el-col>
-              </el-row>
-              <el-row class="srarch-screen">
                 <el-col :span="12">
                   <el-form-item label="发布时间">
                     <el-col :span="10">
@@ -66,34 +44,10 @@
                     </el-col>
                   </el-form-item>
                 </el-col>
-                <el-col :span="12">
-                  <el-form-item label="匹配方式">
-                    <el-radio-group v-model="condition.filed" @change="changeFiled">
-                      <el-radio label="">按全文</el-radio>
-                      <el-radio label="content">按正文</el-radio>
-                      <el-radio label="title">按标题</el-radio>
-                    </el-radio-group>
-                  </el-form-item>
-                </el-col>
               </el-row>
               <el-row class="srarch-screen">
                 <el-col :span="12">
-                  <el-form-item label="情感属性">
-                    <div class="all">
-                      <el-checkbox :indeterminate="isIndeterminateEmotion" v-model="checkAllEmotion"
-                                   @change="handleEmotionCheckAllChange">全选
-                      </el-checkbox>
-                    </div>
-                    <div class="single">
-                      <el-checkbox-group v-model="emotionArray" @change="handleCheckedEmotionChange">
-                        <el-checkbox v-for="emotion in emotions" :label="emotion" :key="emotion">{{emotion}}
-                        </el-checkbox>
-                      </el-checkbox-group>
-                    </div>
-                  </el-form-item>
-                </el-col>
-                <el-col :span="12">
-                  <el-form-item label="载体类型">
+                  <el-form-item label="事故等级">
                     <div class="all">
                       <el-checkbox :indeterminate="isIndeterminateMediaType" v-model="checkAllMediaType"
                                    @change="handleMediaTypeCheckAllChange">全选
@@ -107,118 +61,54 @@
                   </el-form-item>
                 </el-col>
               </el-row>
-              <el-row class="srarch-screen-noborder">
-                <el-col :span="12">
-                  <el-form-item label="显示条数">
-                    <el-radio-group v-model="pager.pageSize" @change="changePageSize">
-                      <el-radio :label="10">10</el-radio>
-                      <el-radio :label="30">30</el-radio>
-                      <el-radio :label="50">50</el-radio>
-                      <el-radio :label="100">100</el-radio>
-                    </el-radio-group>
-                  </el-form-item>
-                </el-col>
-              </el-row>
             </el-form>
           </el-collapse-item>
         </el-collapse>
       </el-col>
     </el-row>
     <el-row :gutter="15">
-      <el-col :span="6">
+      <el-col :span="8">
         <el-card class="box-card">
           <div slot="header" class="chart-header">
             <span class="chart-text">事故列表</span>
           </div>
-          <div>
-            <p align="left">
-              国家安全监管总局台风橙色预警信息：中央气象台8月26日18时发布台风橙色预警...
-            </p>
-            <div align="right">
-              <span>2017-03-17</span>
-            </div>
-          </div>
-          <div>
-            <p align="left">
-              国家安全监管总局台风橙色预警信息：中央气象台8月26日18时发布台风橙色预警
-            </p>
-            <div align="right">
-              <span>2017-03-17</span>
-            </div>
-          </div>
-          <div>
-            <p align="left">
-              国家安全监管总局台风橙色预警信息：中央气象台8月26日18时发布台风橙色预警
-            </p>
-            <div align="right">
-              <span>2017-03-17</span>
-            </div>
-          </div>
-          <div>
-            <p align="left">
-              国家安全监管总局台风橙色预警信息：中央气象台8月26日18时发布台风橙色预警
-            </p>
-            <div align="right">
-              <span>2017-03-17</span>
-            </div>
-          </div>
-          <div>
-            <p align="left">
-              国家安全监管总局台风橙色预警信息：中央气象台8月26日18时发布台风橙色预警
-            </p>
-            <div align="right">
-              <span>2017-03-17</span>
-            </div>
-          </div>
-          <div>
-            <p align="left">
-              国家安全监管总局台风橙色预警信息：中央气象台8月26日18时发布台风橙色预警
-            </p>
-            <div align="right">
-              <span>2017-03-17</span>
-            </div>
-          </div>
-          <div>
-            <p align="left">
-              国家安全监管总局台风橙色预警信息：中央气象台8月26日18时发布台风橙色预警
-            </p>
-            <div align="right">
-              <span>2017-03-17</span>
-            </div>
-          </div>
-          <div>
-            <p align="left">
-              国家安全监管总局台风橙色预警信息：中央气象台8月26日18时发布台风橙色预警
-            </p>
-            <div align="right">
-              <span>2017-03-17</span>
-            </div>
-          </div>
-          <div>
-            <p align="left">
-              国家安全监管总局台风橙色预警信息：中央气象台8月26日18时发布台风橙色预警
-            </p>
-            <div align="right">
-              <span>2017-03-17</span>
-            </div>
-          </div>
-          <div>
-            <p align="left">
-              国家安全监管总局台风橙色预警信息：中央气象台8月26日18时发布台风橙色预警
-            </p>
-            <div align="right">
-              <span>2017-03-17</span>
-            </div>
-          </div>
-          <div class="block">
-            <el-pagination
-              layout="prev, pager, next"
-              :total="50">
-            </el-pagination>
+          <div v-loading="accidentsLoading">
+            <el-row>
+              <div v-if="accidentData.accidents.length === 0">
+                暂无数据
+              </div>
+              <div v-if="accidentData.accidents.length > 0">
+                <div v-for="item in accidentData.accidents" @click="getAccidentId(item.id)">
+                  <el-col :span="20">
+                    <div align="left" v-html="item.companyFullName"></div>
+                  </el-col>
+                  <el-col :span="4" v-if="item.from === '网络爬虫'">
+                    <span><i class="el-icon-star-off"></i></span>
+                  </el-col>
+                  <el-col :span="24">
+                    <div align="left" v-html="item.content"></div>
+                  </el-col>
+                  <el-col :span="24">
+                    <div align="right">
+                      <span>{{item.originaltime}}</span>
+                    </div>
+                  </el-col>
+                </div>
+              </div>
+            </el-row>
+            <el-row>
+              <div class="block">
+                <el-pagination
+                  layout="prev, pager, next"
+                  :total=accidentData.pager.totalElements
+                  @current-change="getAccidentsListPager">
+                </el-pagination>
+              </div>
+            </el-row>
           </div>
         </el-card>
       </el-col>
-      <el-col :span="18">
+      <el-col :span="16">
         <el-tabs v-model="activeName" @tab-click="handleClick">
           <el-tab-pane label="事件详情" name="details">
             <el-row :gutter="15">
@@ -278,7 +168,7 @@
                   :articles="articles"
                   v-loading="articlesLoading"
                   :pager="pager"
-                  @data="getData">
+    >
     </article-list>
   </div>
 </template>
@@ -292,8 +182,8 @@
     getFilterAndGroupBy
   } from '@/service/article'
   import dragTree from '@/components/common/drag-tree'
-  const typeOptions = ['新闻', '微博', '贴吧', '论坛']
-  const emotionOptions = ['正面', '负面', '中性']
+  const typeOptions = ['一般事故', '较大事故', '重大事故', '特大事故']
+  import {getAccidentsList} from '@/service/accident'
   export default {
     name: 'accidentMonitor',
     data() {
@@ -304,16 +194,24 @@
           shouldWord: '',
           startDate: '',
           endDate: '',
-          direction: 'DESC', // 排序方式ASC DESC
-          filed: '',
-          orders: [],
+          direction: 'adate', // 排序方式ASC DESC
           searchKv: [],
           type: []
         },
-        emotionArray: [],
+        isIndeterminateMediaType: false,
+        checkAllMediaType: false,
+        articlesLoading: false,
+        accidentsLoading: false,
+        accidentData: {
+          accidents: [],
+          pager: {
+            pageSize: 10,
+            currentPage: 1,
+            totalElements: 10
+          }
+        },
         mediaTypeArray: [],
         mediaTypes: typeOptions,
-        emotions: emotionOptions,
         activeName: 'details',
         tableData: [
           {
@@ -410,9 +308,57 @@
       'drag-tree': dragTree
     },
     mounted () {
-      this.getAreaWarningBarChart()
+      this.renderPageData()
     },
     methods: {
+      /*
+       * 更改左侧事故列表页码
+       * */
+      getAccidentsListPager (page) {
+        this.accidentData.pager.currentPage = page
+        this.getAccidentList()
+      },
+      /*
+       * 获取事故的id
+       * */
+      getAccidentId (id) {
+        alert(id)
+      },
+      /*
+       * 默认渲染
+       * */
+      renderPageData() {
+        this.getAreaWarningBarChart()
+        this.getAccidentList()
+      },
+      /**
+       *  点击类型全选
+       */
+      handleMediaTypeCheckAllChange(event) {
+        let self = this
+        self.mediaTypeArray = event.target.checked ? self.mediaTypes : []
+        self.isIndeterminateMediaType = false
+
+        let mediaTypes = []
+        self.mediaTypeArray.forEach(function (item) {
+          mediaTypes.push(item)
+        })
+        self.condition.type = mediaTypes
+      },
+      /**
+       *  点击单个类型
+       */
+      handleCheckedMediaTypeChange(value) {
+        let self = this
+        let checkedCount = value.length
+        self.checkAllMediaType = checkedCount === this.mediaTypes.length
+        self.isIndeterminateMediaType = checkedCount > 0 && checkedCount < self.mediaTypes.length
+        let mediaTypes = []
+        self.mediaTypeArray.forEach(function (item) {
+          mediaTypes.push(item)
+        })
+        self.condition.type = mediaTypes
+      },
       /*
        *根据点击tab来分别渲染
        */
@@ -471,6 +417,27 @@
           renderItem.data = data
           renderData.push(renderItem)
           self.areaWarningConfig.option = barChartOption.getOption(renderData, chartConfig)
+        }).catch(error => {
+          self.$confirm(error.message, '错误', {type: 'error'})
+        })
+      },
+      /**
+       * 根据条件获取事故列表
+       */
+      getAccidentList () {
+        let self = this
+        self.accidentsLoading = true
+        let param = {}
+        param.limit = self.accidentData.pager.pageSize
+        param.page = self.accidentData.pager.currentPage
+        param.orders = [{
+          'direction': 'DESC',
+          'orderBy': self.condition.direction
+        }]
+        getAccidentsList(param).then(data => {
+          self.accidentsLoading = false
+          self.accidentData.accidents = data.content
+          self.accidentData.pager.totalElements = data.totalElements
         }).catch(error => {
           self.$confirm(error.message, '错误', {type: 'error'})
         })

@@ -15,3 +15,10 @@ axios.defaults.headers.common['Authorization'] = AUTH_TOKEN
 export const getAccidents = params => {
   return axios.post(`${base}/report/aggregate.json`, params).then(res => res.data)
 }
+/**
+ * 获取事故监测事故列表数据
+ * @param params
+ */
+export const getAccidentsList = params => {
+  return axios.post(`${base}/accident/page`, params).then(res => res.data)
+}

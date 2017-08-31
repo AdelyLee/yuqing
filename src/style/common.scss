@@ -31,7 +31,7 @@ body {
 
 /* Let's get this party started */
 ::-webkit-scrollbar {
-  width: 0px;
+  width: 10px;
   height: 5px;
 }
 
@@ -137,7 +137,7 @@ body {
 
 /* tab header 样式 */
 .el-tabs__header {
-  margin-bottom:10px;
+  margin-bottom: 10px;
 }
 
 /* tab item 字体颜色样式 */
@@ -252,6 +252,9 @@ body {
     }
   }
   aside {
+    ::-webkit-scrollbar {
+      width: 0px;
+    }
     background: $header-background;
     .el-menu {
       background-color: $header-background;
@@ -1355,7 +1358,7 @@ body {
         font-size: 24px;
         margin-top: 10px
       }
-      .article-item{
+      .article-item {
         text-align: center;
       }
       .article-source, .article-pubTime {
@@ -1371,8 +1374,7 @@ body {
       }
       .article-content {
         font-family: "FangSong_GB2312";
-        text-align: left;
-      ;
+        text-align: left;;
       }
     }
     // report chart size
@@ -1517,13 +1519,16 @@ body {
   background-size: 40px 40px !important;
   margin-top: 30%;
 }
-.gender-img{
+
+.gender-img {
   background: url('../../src/assets/img/female.svg') no-repeat;
 }
-.gendermale-img{
+
+.gendermale-img {
   background: url('../../src/assets/img/male.svg') no-repeat;
 }
-.gender-fb{
+
+.gender-fb {
   float: left;
   color: #ff733f;
   margin-top: 80%;
@@ -1601,26 +1606,32 @@ body {
 .ztree li a {
   color: $font-color;
 }
-.ztree li a.curSelectedNode {color:$font-color;}
+
+.ztree li a.curSelectedNode {
+  color: $font-color;
+}
+
 /* @ 综合检测
 ----------------------------------------------------------------*/
-.leader-header{
+.leader-header {
   float: left;
-  width:100%;
+  width: 100%;
   background: #1b6cc2;
-  height:40px;
-  li{
-    width:15%;
+  height: 40px;
+  li {
+    width: 15%;
     margin-left: 10px;
     line-height: 40px;
-    color:#ffffff ;
+    color: #ffffff;
     float: left;
     list-style-type: none;
   }
 }
+
 .v-modal {
   z-index: 0 !important;
 }
+
 #areaWarning {
   height: 360px;
 }

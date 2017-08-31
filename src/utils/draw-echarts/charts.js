@@ -19,8 +19,14 @@ import $ from 'jquery'
 import echarts from 'echarts'
 import {mapChartUtil} from './map-chart-util'
 
-$.ajaxSettings.async = false
-
+function getTheme() {
+  let {style = ''} = JSON.parse(localStorage.getItem('systemConfig'))
+  style = style !== null && style !== '' ? style : 'default'
+  let themeData = require('static/charts-theme/' + style + '.json')
+  let {themeName = '', theme = {}} = themeData
+  echarts.registerTheme(themeName, theme)
+  return themeName
+}
 export const chart = {
   /**
    * 绘制echarts柱状图或折线图
@@ -30,15 +36,7 @@ export const chart = {
    */
   drawLineBarChart: function (containerId, option, events) {
     echarts.dispose(document.getElementById(containerId))
-    let themeData = {}
-    let {style = ''} = JSON.parse(localStorage.getItem('systemConfig'))
-    style = style !== null && style !== '' ? style : 'default'
-    $.getJSON('../static/charts-theme/' + style + '.json', (data) => {
-      themeData = data
-      echarts.registerTheme(themeData.themeName, themeData.theme)
-    })
-    let {themeName = ''} = themeData
-    let myChart = echarts.init(document.getElementById(containerId), themeName)
+    let myChart = echarts.init(document.getElementById(containerId), getTheme())
     // 指定图表默认配置项和数据
     let defaultOption = {
       tooltip: {},
@@ -78,15 +76,7 @@ export const chart = {
    */
   drawPieChart: function (containerId, option, events) {
     echarts.dispose(document.getElementById(containerId))
-    let themeData = {}
-    let {style = ''} = JSON.parse(localStorage.getItem('systemConfig'))
-    style = style !== null && style !== '' ? style : 'default'
-    $.getJSON('../static/charts-theme/' + style + '.json', (data) => {
-      themeData = data
-      echarts.registerTheme(themeData.themeName, themeData.theme)
-    })
-    let {themeName = ''} = themeData
-    let myChart = echarts.init(document.getElementById(containerId), themeName)
+    let myChart = echarts.init(document.getElementById(containerId), getTheme())
     // 指定图表默认配置项和数据
     let defaultOption = {
       tooltip: {},
@@ -135,15 +125,7 @@ export const chart = {
    */
   drawGaugeChart: function (containerId, option, events) {
     echarts.dispose(document.getElementById(containerId))
-    let themeData = {}
-    let {style = ''} = JSON.parse(localStorage.getItem('systemConfig'))
-    style = style !== null && style !== '' ? style : 'default'
-    $.getJSON('../static/charts-theme/' + style + '.json', (data) => {
-      themeData = data
-      echarts.registerTheme(themeData.themeName, themeData.theme)
-    })
-    let {themeName = ''} = themeData
-    let myChart = echarts.init(document.getElementById(containerId), themeName)
+    let myChart = echarts.init(document.getElementById(containerId), getTheme())
     // 指定图表默认配置项和数据
     let defaultOption = {
       tooltip: {},
@@ -220,59 +202,49 @@ export const chart = {
       return mapJsonUrl
     }
 
-    $.get(getJsonUrl(mapType), (mapJson) => {
-      echarts.dispose(document.getElementById(containerId))
-      echarts.registerMap(mapType, mapJson)
-      let themeData = {}
-      let {style = ''} = JSON.parse(localStorage.getItem('systemConfig'))
-      style = style !== null && style !== '' ? style : 'default'
-      $.getJSON('../static/charts-theme/' + style + '.json', (data) => {
-        themeData = data
-        echarts.registerTheme(themeData.themeName, themeData.theme)
-      })
-      let {themeName = ''} = themeData
-      let myChart = echarts.init(document.getElementById(containerId), themeName)
-      // 指定图表默认配置项和数据
-      let defaultOption = {
-        tooltip: {
-          trigger: 'item',
-          formatter: '{b}'
-        },
-        series: [
-          {
-            name: '地图',
-            type: 'map',
-            mapType: mapType,
-            selectedMode: 'multiple',
-            label: {
-              normal: {
-                show: true
-              },
-              emphasis: {
-                show: true
-              }
+    echarts.dispose(document.getElementById(containerId))
+    echarts.registerMap(mapType, getJsonUrl(mapType))
+    let myChart = echarts.init(document.getElementById(containerId), getTheme())
+    // 指定图表默认配置项和数据
+    let defaultOption = {
+      tooltip: {
+        trigger: 'item',
+        formatter: '{b}'
+      },
+      series: [
+        {
+          name: '地图',
+          type: 'map',
+          mapType: mapType,
+          selectedMode: 'multiple',
+          label: {
+            normal: {
+              show: true
             },
-            data: []
-          }
-        ]
-      }
+            emphasis: {
+              show: true
+            }
+          },
+          data: []
+        }
+      ]
+    }
 
-      if (option.series && option.series.length > 0) {
-        delete defaultOption.series[0].data
-      }
-      $.extend(true, defaultOption, option)
+    if (option.series && option.series.length > 0) {
+      delete defaultOption.series[0].data
+    }
+    $.extend(true, defaultOption, option)
 
-      if (events) {
-        for (let i in events) {
-          let event = events[i]
-          if (typeof event === 'function') {
-            myChart.on(i, event)
-          }
+    if (events) {
+      for (let i in events) {
+        let event = events[i]
+        if (typeof event === 'function') {
+          myChart.on(i, event)
         }
       }
+    }
 
-      myChart.setOption(defaultOption)
-    })
+    myChart.setOption(defaultOption)
   },
 
   /**

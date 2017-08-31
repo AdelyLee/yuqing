@@ -168,18 +168,27 @@
       themeChange (theme) {
         // 修改主题,当用户重新登录时,主题设置启用
         let self = this
-        let params = {style: theme}
-        let systemConfig = JSON.parse(localStorage.getItem('systemConfig'))
-        if (theme !== systemConfig.style) {
+        let {systemName = '', iconUrl = '', style = ''} = JSON.parse(localStorage.getItem('systemConfig'))
+        systemName = systemName !== null && systemName !== '' ? systemName : '舆情系统'
+        iconUrl = iconUrl !== null && iconUrl !== '' ? iconUrl : 'logo'
+        theme = theme !== null && theme !== '' ? theme : 'default'
+        let params = {
+          systemName: systemName,
+          iconUrl: iconUrl,
+          style: theme
+        }
+        if (theme !== style) {
           editUserConfig(params).then(data => {
-            self.$confirm('更改主题成功,系统重新登录主题才能启用,是否重新登录?', '提示', {type: 'warning'}).then(() => {
-              localStorage.clear()
-              self.$router.push('/login')
-            }).catch(() => {
-              self.$message({
-                message: '主题在重新登录后才启用!',
-                type: 'info'
-              })
+            self.$message({
+              message: '更改主题成功!',
+              type: 'success'
+            })
+            localStorage.setItem('systemConfig', JSON.stringify(data))
+            window.location.reload()
+          }).catch(() => {
+            self.$message({
+              message: '更改主题失败!',
+              type: 'error'
             })
           })
         }

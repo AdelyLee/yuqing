@@ -22,7 +22,7 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
   if (to.path.startsWith('/login')) {
-    window.localStorage.removeItem('access-user')
+    window.localStorage.clear()
     next()
   } else {
     let user = (window.localStorage.getItem('access-user'))

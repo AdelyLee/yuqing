@@ -51,6 +51,7 @@
 </template>
 
 <script>
+  import {PROJECT_NAME} from '@/service/common'
   import axios from 'axios'
   import {accountLogin, getUserConfig} from '@/service/user'
   import {utils} from '@/utils/utils'
@@ -91,7 +92,7 @@
                     type: 'error'
                   })
                 } else {
-                  let basePath = utils.getBasePath()
+                  let basePath = utils.getBasePath() + '/' + PROJECT_NAME
                   localStorage.setItem('basePath', basePath)
                   localStorage.setItem('access-user', token)
                   axios.defaults.headers.common['Authorization'] = token
