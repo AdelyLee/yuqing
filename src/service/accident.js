@@ -20,5 +20,26 @@ export const getAccidents = params => {
  * @param params
  */
 export const getAccidentsList = params => {
-  return axios.post(`${base}/accident/page`, params).then(res => res.data)
+  return axios.post(`${base}/accident/findByDate`, params).then(res => res.data)
+}
+/**
+ * 获取事故监测事故列表数据
+ * @param params
+ */
+export const getAccidentsCompanyName = (params, name) => {
+  return axios.post(`${base}/accident/findByCompanyFullNameLike?companyFullName=` + name, params).then(res => res.data)
+}
+/**
+ * 获取事故监测关键词
+ * @param params
+ */
+export const getAccidentMonitorKeyWords = params => {
+  return axios.get(`${base}/accidentYuqing/keyWords/` + params).then(res => res.data)
+}
+/**
+ * 获取事故内容
+ * @param params
+ */
+export const getAccidentContent = params => {
+  return axios.get(`${base}/accident/findById/` + params).then(res => res.data)
 }

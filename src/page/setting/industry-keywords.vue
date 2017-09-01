@@ -3,7 +3,7 @@
     <el-col :span="24">
       <div class="card-body">
         <div class="model">
-        <p class="title">关键词设置</p>
+        <p class="pTitle manage-title-img">行业关键词设置</p>
         <div class="buttons industry">
           <div class="el-tabs__header">
             <div class="el-tabs__nav-wrap">
@@ -253,32 +253,34 @@
         // 验证关键词不能为空
         self.$refs.keywordsForm.validate((valid) => {
           if (valid) {
-            editKeywords(params).then(industryKeywords => {
-              if (industryKeywords) {
-                localStorage.setItem('industryKeywords', JSON.stringify(industryKeywords))
-                if (!switchModel) {
-                  self.$message({
-                    showClose: true,
-                    message: '保存焦点关键词成功!',
-                    type: 'success'
-                  })
-                }
-              } else {
-                if (switchModel) {
-                  self.$message({
-                    showClose: true,
-                    message: '切换模式失败!',
-                    type: 'error'
-                  })
+            if (self.keywordsForm.expression !== '') {
+              editKeywords(params).then(industryKeywords => {
+                if (industryKeywords) {
+                  localStorage.setItem('industryKeywords', JSON.stringify(industryKeywords))
+                  if (!switchModel) {
+                    self.$message({
+                      showClose: true,
+                      message: '保存焦点关键词成功!',
+                      type: 'success'
+                    })
+                  }
                 } else {
-                  self.$message({
-                    showClose: true,
-                    message: '保存焦点关键词失败!',
-                    type: 'error'
-                  })
+                  if (switchModel) {
+                    self.$message({
+                      showClose: true,
+                      message: '切换模式失败!',
+                      type: 'error'
+                    })
+                  } else {
+                    self.$message({
+                      showClose: true,
+                      message: '保存焦点关键词失败!',
+                      type: 'error'
+                    })
+                  }
                 }
-              }
-            })
+              })
+            }
           }
         })
       }

@@ -3,7 +3,7 @@
     <el-col :span="24">
       <div class="card-body">
         <div class="model">
-          <p class="pTitle manage-title-img">领导关键词设置</p>
+          <p class="pTitle manage-title-img">事故关键词设置</p>
           <el-tabs v-model="keywordsModel">
             <el-tab-pane label="基础模式" name="basic">
               <el-form :model="keywordsForm" :rules="rules" ref="keywordsForm" label-width="150px">
@@ -102,7 +102,7 @@
   </div>
 </template>
 
-<script>
+<script type="text/ecmascript-6">
 import { getKeywords, editKeywords } from '@/service/config'
 export default {
   name: 'accidentKeywords',
@@ -212,32 +212,34 @@ export default {
       // 验证关键词不能为空
       self.$refs.keywordsForm.validate((valid) => {
         if (valid) {
-          editKeywords(params).then(accidentKeywords => {
-            if (accidentKeywords) {
-              localStorage.setItem('accidentKeywords', JSON.stringify(accidentKeywords))
-              if (!switchModel) {
-                self.$message({
-                  showClose: true,
-                  message: '保存焦点关键词成功!',
-                  type: 'success'
-                })
-              }
-            } else {
-              if (switchModel) {
-                self.$message({
-                  showClose: true,
-                  message: '切换模式失败!',
-                  type: 'error'
-                })
+          if (self.keywordsForm.expression !== '') {
+            editKeywords(params).then(accidentKeywords => {
+              if (accidentKeywords) {
+                localStorage.setItem('accidentKeywords', JSON.stringify(accidentKeywords))
+                if (!switchModel) {
+                  self.$message({
+                    showClose: true,
+                    message: '保存焦点关键词成功!',
+                    type: 'success'
+                  })
+                }
               } else {
-                self.$message({
-                  showClose: true,
-                  message: '保存焦点关键词失败!',
-                  type: 'error'
-                })
+                if (switchModel) {
+                  self.$message({
+                    showClose: true,
+                    message: '切换模式失败!',
+                    type: 'error'
+                  })
+                } else {
+                  self.$message({
+                    showClose: true,
+                    message: '保存焦点关键词失败!',
+                    type: 'error'
+                  })
+                }
               }
-            }
-          })
+            })
+          }
         }
       })
     }

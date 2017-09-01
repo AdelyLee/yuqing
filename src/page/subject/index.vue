@@ -7,7 +7,7 @@
             <div class="button-list">
               <div class="subject-gl" @click="showSubjectList">
                 <img src="../../assets/img/ztgl.svg"
-                     style="float:left;width:33px;height: 31px;margin-left: 50px;margin-top: 10px;">专题管理
+                     style="float:left;width:33px;height: 31px;margin-left: 30px;margin-top: 10px;">专题管理
                 <el-row>
                   <div class="border-left-top"></div>
                   <div class="border-right-top"></div>
@@ -19,7 +19,7 @@
               </div>
               <div class="subject-bg" @click="showReportList">
                 <img src="../../assets/img/reports.svg"
-                     style="float:left;width:33px;height: 31px;margin-left: 50px;margin-top: 10px;">已生成报告
+                     style="float:left;width:33px;height: 31px;margin-left: 30px;margin-top: 10px;">已生成报告
                 <el-row>
                   <div class="border-left-top"></div>
                   <div class="border-right-top"></div>
@@ -182,7 +182,7 @@
             </el-form-item>
           </el-form>
           <div slot="footer" class="dialog-footer">
-            <el-button type="danger" @click.native="editSubjectDialogVisible = false">取消</el-button>
+            <el-button type="danger" @click.native="editSubjectDialogVisible = false" style="color:#000;">取消</el-button>
             <el-button type="success" @click="estimateSubject(subjectEditForm, 'subjectEditForm')">预估</el-button>
             <el-button type="primary" @click.native="subjectEditFormSubmit(subjectEditForm)">保存</el-button>
           </div>
@@ -192,57 +192,92 @@
         <el-dialog class="edit-warning-dialog" title="编辑预警" :visible.sync="editWarningDialogVisible" size="small">
           <el-tabs v-model="activeNames" @tab-click="wxhandleClick">
             <el-tab-pane label="邮箱预警" name="dxWarning">
-              <el-form :inline="true" ref="contactForm" :model="contactForm" :rules="warningContactRules" label-width="80px"
-                       class="demo-ruleForm">
-                <el-form-item label="联系人" prop="name">
-                  <el-input v-model="contactForm.name" placeholder="请输入联系人"></el-input>
-                </el-form-item>
-                <el-form-item label="邮箱" prop="account">
-                  <el-input v-model="contactForm.account" placeholder="请输入联系人邮箱"></el-input>
-                </el-form-item>
-                <el-button type="primary" @click.native="addContactSubmit">添加</el-button>
-              </el-form>
+
+              <!--<el-form :inline="true" ref="contactForm" :model="contactForm" :rules="warningContactRules" label-width="80px"-->
+              <!--class="demo-ruleForm">-->
+              <!--<el-form-item label="联系人" prop="name">-->
+              <!--<el-input v-model="contactForm.name" placeholder="请输入联系人"></el-input>-->
+              <!--</el-form-item>-->
+              <!--<el-form-item label="邮箱" prop="account">-->
+              <!--<el-input v-model="contactForm.account" placeholder="请输入联系人邮箱"></el-input>-->
+              <!--</el-form-item>-->
+              <!--<el-button type="primary" @click.native="addContactSubmit">添加</el-button>-->
+              <!--</el-form>-->
+              <el-dialog title="添加联系人" :visible.sync="addFormVisible" :modal="false" :close-on-click-modal="false"
+                         style="text-align:left">
+                <el-form :model="contactForm" :rules="warningContactRules" ref="contactForm" label-width="80px">
+                  <el-form-item label="联系人" prop="name">
+                    <el-input v-model="contactForm.name" placeholder="请输入联系人"></el-input>
+                  </el-form-item>
+                  <el-form-item label="邮箱" prop="account">
+                    <el-input v-model="contactForm.account" placeholder="请输入联系人邮箱"></el-input>
+                  </el-form-item>
+                </el-form>
+                <div slot="footer" class="dialog-footer">
+                  <el-button type="info" @click="resetAddForm">重置</el-button>
+                  <el-button type="primary" @click.native="addContactSubmit">保存</el-button>
+                </div>
+              </el-dialog>
             </el-tab-pane>
             <el-tab-pane label="微信预警" name="wxWarning">
-              <el-form :inline="true" ref="contactForm" :model="contactForm" :rules="wxWarningContactRules" label-width="100px"
-                       class="demo-ruleForm">
-                <el-form-item label="联系人" prop="wxname">
-                  <el-input v-model="contactForm.wxname" placeholder="请输入联系人"></el-input>
-                </el-form-item>
-                <el-form-item label="微信昵称" prop="nickname">
-                  <el-input v-model="contactForm.nickname" placeholder="请输入微信昵称"></el-input>
-                </el-form-item>
-                <el-button type="primary" @click.native="addNickname">添加</el-button>
-              </el-form>
+              <el-dialog title="添加联系人" :visible.sync="wxAddFormVisible" :modal="false" :close-on-click-modal="false"
+                         style="text-align:left">
+                <el-form :model="contactForm" :rules="wxWarningContactRules" ref="contactForm" label-width="80px">
+                  <el-form-item label="联系人" prop="wxname">
+                    <el-input v-model="contactForm.wxname" placeholder="请输入联系人"></el-input>
+                  </el-form-item>
+                  <el-form-item label="微信昵称" prop="nickname">
+                    <el-input v-model="contactForm.nickname" placeholder="请输入微信昵称"></el-input>
+                  </el-form-item>
+                </el-form>
+                <div slot="footer" class="dialog-footer">
+                  <el-button type="info" @click="resetAddForm">重置</el-button>
+                  <el-button type="primary" @click.native="addNickname">保存</el-button>
+                </div>
+              </el-dialog>
               <div class="wxrwm"></div>
             </el-tab-pane>
           </el-tabs>
-          <el-form :model="warningEditForm" ref="warningEditForm" :rules="warningEditFormRules" label-width="80px">
-            <el-table ref="multipleTable" :data="contacts" border height="150"
-                      tooltip-effect="dark"
-                      style="width: 88%; margin-left: 8%" @selection-change="handleSelectionChange">
-              <el-table-column type="selection" width="55"></el-table-column>
-              <el-table-column prop="name" label="联系人" width="180"></el-table-column>
-              <el-table-column v-if="type==='EMAIL'" prop="account" label="邮箱" min-width="180"></el-table-column>
-              <el-table-column v-if="type==='WECHAT'" prop="account" label="微信ID" min-width="180"></el-table-column>
-              <el-table-column label="操作">
-                <template scope="scope">
-                  <el-button size="small" type="danger" @click="handleDeleteContact(scope.row)">
-                    删除
-                  </el-button>
-                </template>
-              </el-table-column>
-            </el-table>
-            <list-page :pager="contactsTablePager" @data="getPager"></list-page>
+          <el-form :model="warningEditForm" ref="warningEditForm" :rules="warningEditFormRules" label-width="90px">
+            <el-form-item>
+              <el-col :span="24" v-if="type==='EMAIL'" class="toolbar">
+                <div style="display:inline-block;">选择联系人</div>
+                <el-form-item class="addBtn">
+                  <el-button type="primary" class="add" @click="showAddDialog">添加</el-button>
+                </el-form-item>
+              </el-col>
+              <el-col :span="24" v-if="type==='WECHAT'" class="toolbar">
+                <div style="display:inline-block;">选择联系人</div>
+                <el-form-item class="addBtn">
+                  <el-button type="primary" class="add" @click="wxShowAddDialog">添加</el-button>
+                </el-form-item>
+              </el-col>
+              <el-table ref="multipleTable" :data="contacts" border height="150"
+                        tooltip-effect="dark"
+                        style="width: 88%; margin-left: 8%" @selection-change="handleSelectionChange">
+                <el-table-column type="selection" width="55"></el-table-column>
+                <el-table-column prop="name" label="联系人" width="180"></el-table-column>
+                <el-table-column v-if="type==='EMAIL'" prop="account" label="邮箱" min-width="180"></el-table-column>
+                <el-table-column v-if="type==='WECHAT'" prop="account" label="微信ID" min-width="180"></el-table-column>
+                <el-table-column label="操作">
+                  <template scope="scope">
+                    <el-button size="small" type="danger" @click="handleDeleteContact(scope.row)">
+                      删除
+                    </el-button>
+                  </template>
+                </el-table-column>
+              </el-table>
+              <list-page :pager="contactsTablePager" @data="getPager"></list-page>
+            </el-form-item>
             <el-form-item label="接收时间" required>
-              <el-col :span="11">
+              <el-col :span="10">
                 <el-form-item prop="receiveStartTime">
                   <el-time-select placeholder="起始时间" v-model="warningEditForm.receiveStartTime"
                                   :picker-options="{ start: '00:00', step: '01:00', end: '23:00'}">
                   </el-time-select>
                 </el-form-item>
               </el-col>
-              <el-col class="line" :span="2">-</el-col>
+              <el-col class="line" :span="2">--</el-col>
               <el-col :span="11">
                 <el-form-item prop="receiveEndTime">
                   <el-time-select placeholder="结束时间" v-model="warningEditForm.receiveEndTime"
@@ -252,11 +287,8 @@
               </el-col>
             </el-form-item>
             <el-form-item label="预警间隔">
-              <el-slider v-model="warningEditForm.hours" :min="1" :max="12" :step="1" show-stops
+              <el-slider v-model="warningEditForm.hours" :min="1" :max="12" :step="1" show-stops :show-tooltip=true
                          :format-tooltip="hoursFormat"></el-slider>
-            </el-form-item>
-            <el-form-item label="预警数量" class="warning-number">
-              <el-input v-model="warningEditForm.minWarningNum" placeholder="请输入预警数量"></el-input>
             </el-form-item>
             <el-form-item label="周末预警">
               <el-radio-group v-model="warningEditForm.atWeekends">
@@ -295,6 +327,11 @@
                 <el-radio label="title">标题</el-radio>
                 <el-radio label="">全文</el-radio>
               </el-radio-group>
+            </el-form-item>
+            <el-form-item label="预警阈值" class="warning-number">
+              <el-input type="number" v-model.number="warningEditForm.minWarningNum" placeholder="请输入最少预警条数"
+                        auto-complete="off" min='0'></el-input>
+            </el-form-item>
             </el-form-item>
           </el-form>
           <div slot="footer" class="dialog-footer">
@@ -337,6 +374,8 @@
         editSubjectDialogVisible: false,
         editWarningDialogVisible: false,
         datePickEditable: false,
+        addFormVisible: false,
+        wxAddFormVisible: false,
         subjectListPager: {
           pageSize: 10,
           currentPage: 1,
@@ -397,20 +436,19 @@
         },
         warningContactRules: {
           name: [{required: true, message: '请输入联系人名称', trigger: 'blur'}],
-          account: [
-            {required: true, message: '请输入邮箱地址', trigger: 'blur'}
-//            {type: 'email', message: '请输入正确的邮箱地址', trigger: 'blur,change'}
+          account: [{type: 'email', message: '请输入正确的邮箱地址', trigger: 'blur,change'}
           ]
         },
         wxWarningContactRules: {
-          wxname: [{message: '请输入联系人名称', trigger: 'blur'}],
+          wxname: [{required: true, message: '请输入联系人名称', trigger: 'blur'}],
           nickname: [
-            {message: '请输入微信昵称', trigger: 'blur'}
+            {required: true, message: '请输入微信昵称', trigger: 'blur'}
           ]
         },
         warningEditFormRules: {
           receiveStartTime: [{required: true, message: '请选择时间', trigger: 'change'}],
-          receiveEndTime: [{required: true, message: '请选择时间', trigger: 'change'}]
+          receiveEndTime: [{required: true, message: '请选择时间', trigger: 'change'}],
+          minWarningNum: [{required: true, type: 'number', message: '年龄必须为数字值'}]
         },
         concatSelectedClick: true,
         multipleSelection: [],
@@ -423,7 +461,7 @@
           atWeekends: true,
           sentimentLabel: [],
           type: [],
-          minWarningNum: ''
+          minWarningNum: 1
         },
         contacts: [],
         type: 'EMAIL',
@@ -448,9 +486,25 @@
     },
     methods: {
       /**
+       * 显示添加联系人对话框
+       */
+      showAddDialog() {
+        let self = this
+        self.addFormVisible = true
+      },
+      /**
+       * 显示添加微信联系人对话框
+       */
+      wxShowAddDialog() {
+        let self = this
+        self.wxAddFormVisible = true
+      },
+      /**
        * 点击专题管理按钮时，展示专题列表
        */
       showSubjectList () {
+        $('.subject-bg').css('background-color', '#0e64a1')
+        $('.subject-gl').css('background-color', '#af7507')
         let self = this
         self.activeName = 'subjectList'
       },
@@ -458,6 +512,8 @@
        * 点击已生成专报按钮时，展示相关的专报
        */
       showReportList () {
+        $('.subject-gl').css('background-color', '#0e64a1')
+        $('.subject-bg').css('background-color', '#af7507')
         let self = this
         self.activeName = 'reportList'
         self.getReportList()
@@ -483,6 +539,7 @@
       resetAddForm () {
         this.$refs['subjectAddForm'].resetFields()
       },
+
       /**
        * 重置修改专题对话框内容
        */
@@ -597,6 +654,7 @@
         let self = this
         let params = subject
         editSubject(params).then(data => {
+          debugger
           if (data) {
             self.$message({
               showClose: true,
@@ -789,13 +847,18 @@
       },
       addNickname() {
         let self = this
-        $('.wxrwm').show()
         self.$refs.contactForm.validate((valid) => {
-          let params = self.contactForm
-          params.type = 'WECHAT'
-          createNickname(params).then(data => {
-            self.wxid = data.openid
-          })
+          if (valid) {
+            self.wxAddFormVisible = false
+            $('.wxrwm').show()
+            if (self.contactForm.wxname !== '') {
+              let params = self.contactForm
+              params.type = 'WECHAT'
+              createNickname(params).then(data => {
+                self.wxid = data.openid
+              })
+            }
+          }
         })
       },
       /**
@@ -816,6 +879,7 @@
               params.type = 'EMAIL'
             }
             addContact(params).then(data => {
+              self.addFormVisible = false
               if (data) {
                 self.$message({
                   showClose: true,
@@ -950,6 +1014,7 @@
         this.$refs.warningEditForm.validate((valid) => {
           if (valid) {
             // 获取选中的联系人，
+            debugger
             warning.contacts = this.multipleSelection
             self.subject.warning = warning
             self.subject.enableWarning = true
@@ -1135,6 +1200,7 @@
       box-shadow: none;
     }
     .subject-list-box {
+      margin-top: 10px;
       .action-list {
         margin-bottom: 15px;
         float: left;
@@ -1178,11 +1244,11 @@
       color: #fff;
       border: none;
     }
-  .warning-number {
-    input {
-      width: 42%;
+    .warning-number {
+      input {
+        width: 42%;
+      }
     }
-  }
 
     .delete {
       background-color: #d0300b;
@@ -1208,14 +1274,26 @@
     .el-table th {
       text-align: center;
     }
-  .wxrwm{
-    display: none;
-    width: 200px;
-    height: 200px;
-    margin: 0 auto;
-    margin-bottom: 10px;
-    background-image: url("../../../src/assets/img/wx.jpg");
-  }
+    .wxrwm {
+      display: none;
+      width: 200px;
+      height: 200px;
+      margin: 0 auto;
+      margin-bottom: 10px;
+      background-image: url("../../../src/assets/img/wx.jpg");
+    }
+    .addBtn {
+      /*position: absolute;*/
+      /*top: 150px;*/
+      /*right: 25px;*/
+      /*z-index: 99;*/
+      float: right;
+      margin-right: 30px;
+      margin-top: 20px;
+      .el-button {
+        padding: 5px 7px;
+      }
+    }
   }
 </style>
 

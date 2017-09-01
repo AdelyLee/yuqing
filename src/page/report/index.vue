@@ -6,7 +6,7 @@
           <el-col :span="24">
             <div class="button-list">
               <div class="subject-gl"  @click="showMonthlyReportList">
-                <img src="../../assets/img/ztgl.svg" style="float:left;width:33px;height: 31px;margin-left: 50px;margin-top: 10px;">月报
+                <img src="../../assets/img/ztgl.svg" style="float:left;width:33px;height: 31px;margin-left: 30px;margin-top: 10px;">月报
                 <el-row>
                   <div class="border-left-top"></div>
                   <div class="border-right-top"></div>
@@ -17,7 +17,7 @@
                 </el-row>
               </div>
               <div class="subject-bg" @click="showWeeklyReportList">
-                <img src="../../assets/img/reports.svg" style="float:left;width:33px;height: 31px;margin-left: 50px;margin-top: 10px;">周报
+                <img src="../../assets/img/reports.svg" style="float:left;width:33px;height: 31px;margin-left: 30px;margin-top: 10px;">周报
                 <el-row>
                   <div class="border-left-top"></div>
                   <div class="border-right-top"></div>
@@ -113,8 +113,8 @@
       },
 
       showMonthlyReportList () {
-        $('.subject-bg').css('background-color', '#af7507')
-        $('.subject-gl').css('background-color', '#0e64a1')
+        $('.subject-bg').css('background-color', '#0e64a1')
+        $('.subject-gl').css('background-color', '#af7507')
         let self = this
         self.reportType = 'MONTHLY'
         self.reportListHeader = '往期月报'
@@ -122,8 +122,8 @@
       },
 
       showWeeklyReportList () {
-        $('.subject-gl').css('background-color', '#af7507')
-        $('.subject-bg').css('background-color', '#0e64a1')
+        $('.subject-gl').css('background-color', '#0e64a1')
+        $('.subject-bg').css('background-color', '#af7507')
         let self = this
         self.reportType = 'WEEKLY'
         self.reportListHeader = '往期周报'

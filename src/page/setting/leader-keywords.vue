@@ -212,32 +212,34 @@ export default {
       // 验证关键词不能为空
       self.$refs.keywordsForm.validate((valid) => {
         if (valid) {
-          editKeywords(params).then(leaderKeywords => {
-            if (leaderKeywords) {
-              localStorage.setItem('leaderKeywords', JSON.stringify(leaderKeywords))
-              if (!switchModel) {
-                self.$message({
-                  showClose: true,
-                  message: '保存焦点关键词成功!',
-                  type: 'success'
-                })
-              }
-            } else {
-              if (switchModel) {
-                self.$message({
-                  showClose: true,
-                  message: '切换模式失败!',
-                  type: 'error'
-                })
+          if (self.keywordsForm.expression !== '') {
+            editKeywords(params).then(leaderKeywords => {
+              if (leaderKeywords) {
+                localStorage.setItem('leaderKeywords', JSON.stringify(leaderKeywords))
+                if (!switchModel) {
+                  self.$message({
+                    showClose: true,
+                    message: '保存焦点关键词成功!',
+                    type: 'success'
+                  })
+                }
               } else {
-                self.$message({
-                  showClose: true,
-                  message: '保存焦点关键词失败!',
-                  type: 'error'
-                })
+                if (switchModel) {
+                  self.$message({
+                    showClose: true,
+                    message: '切换模式失败!',
+                    type: 'error'
+                  })
+                } else {
+                  self.$message({
+                    showClose: true,
+                    message: '保存焦点关键词失败!',
+                    type: 'error'
+                  })
+                }
               }
-            }
-          })
+            })
+          }
         }
       })
     }

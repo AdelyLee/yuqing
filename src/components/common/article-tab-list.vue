@@ -2,7 +2,7 @@
   <div class="article-list-tab">
     <el-col :span="24" class="article-list-header">
       <div class="article-tab-title-background">{{articleData.titleText}}</div>
-      <div class="sort-btn" v-if="articleData.titleText!='焦点报道'">
+      <div class="sort-btn" v-if="articleData.titleText!='焦点报道'&& articleData.titleText!='舆情热点'">
         <el-col :span="24">
           <el-button size="small" :class="{active: articleData.sortBy === 'score' ? true : false}"
                      @click="sortByScore(articleData.type)">相关度
@@ -14,8 +14,8 @@
       </div>
     </el-col>
     <el-col :span="24">
-      <ul class="article-list" v-if="articleData.titleText!='焦点报道'">
-         <li v-for="item in articleData.articles" :id="item.id" :key="item.id" @click="showDetail(item.id)">
+      <ul class="article-list" v-if="articleData.titleText!='焦点报道' && articleData.titleText!='舆情热点'">
+        <li v-for="item in articleData.articles" :id="item.id" :key="item.id" @click="showDetail(item.id)">
           <el-row :gutter="1">
             <el-col :span="13" style="text-align: left;">
               <el-col :span="2">
@@ -32,12 +32,12 @@
             <el-col :span="2" style="text-align: center">
               <div v-if="item.nlp.sentiment.label === '正面'" class="iconfont icon-positive" style="color: #41A6D8"></div>
               <div v-if="item.nlp.sentiment.label === '负面'" class="iconfont icon-negative" style="color: #E71D21"></div>
-              <div v-if="item.nlp.sentiment.label === '中性'" class="iconfont icon-neutral"  style="color: #E9C95B"></div>
+              <div v-if="item.nlp.sentiment.label === '中性'" class="iconfont icon-neutral" style="color: #E9C95B"></div>
             </el-col>
           </el-row>
         </li>
       </ul>
-      <div v-if="articleData.titleText=='焦点报道'" class="article-table-head">
+      <div v-if="articleData.titleText=='焦点报道'|| articleData.titleText=='舆情热点'" class="article-table-head">
         <el-row :gutter="1">
           <el-col :span="2" align='center'>排名</el-col>
           <el-col :span="13" align='center'>名称</el-col>
@@ -46,7 +46,7 @@
           <el-col :span="3" align='center'>时间</el-col>
         </el-row>
       </div>
-      <ul class="article-list article-focus" v-if="articleData.titleText=='焦点报道'">
+      <ul class="article-list article-focus" v-if="articleData.titleText=='焦点报道'|| articleData.titleText=='舆情热点'">
         <li v-for="item in articleData.articles" :titleSimHash="item.titleSimHash"
             @click="getSimilar(item.titleSimHash)">
           <el-row :gutter="1">
@@ -75,8 +75,9 @@
         </li>
       </ul>
     </el-col>
-    <el-col :span="24" class="table-bottom" v-if="articleData.titleText!='焦点报道'">
-      <el-button type="text" class="article-more" @click="showMoreArticles(articleData.type)">{{articleData.btnText}}</el-button>
+    <el-col :span="24" class="table-bottom" v-if="articleData.titleText!='焦点报道'&& articleData.titleText!='舆情热点'">
+      <el-button type="text" class="article-more" @click="showMoreArticles(articleData.type)">{{articleData.btnText}}
+      </el-button>
     </el-col>
   </div>
 </template>

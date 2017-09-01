@@ -3,7 +3,7 @@
     <el-col :span="24">
       <div class="card-body">
         <div class="model">
-          <p class="pTitle manage-title-img">关键词设置</p>
+          <p class="pTitle manage-title-img">基础关键词设置</p>
           <el-tabs v-model="keywordsModel">
             <el-tab-pane label="基础模式" name="basic">
               <el-form :model="keywordsForm" :rules="rules" ref="keywordsForm" label-width="150px">
@@ -201,7 +201,7 @@ export default {
         obj.value += str
       }
     },
-     /**
+    /**
      * 点击模式切换按钮或保存按钮时,调用保存方法
      * @param str
      */
@@ -211,32 +211,34 @@ export default {
       // 验证关键词不能为空
       self.$refs.keywordsForm.validate((valid) => {
         if (valid) {
-          editKeywords(params).then(baseKeywords => {
-            if (baseKeywords) {
-              localStorage.setItem('baseKeywords', JSON.stringify(baseKeywords))
-              if (!switchModel) {
-                self.$message({
-                  showClose: true,
-                  message: '保存基础关键词成功!',
-                  type: 'success'
-                })
-              }
-            } else {
-              if (switchModel) {
-                self.$message({
-                  showClose: true,
-                  message: '切换模式失败!',
-                  type: 'error'
-                })
+          if (self.keywordsForm.expression !== '') {
+            editKeywords(params).then(baseKeywords => {
+              if (baseKeywords) {
+                localStorage.setItem('baseKeywords', JSON.stringify(baseKeywords))
+                if (!switchModel) {
+                  self.$message({
+                    showClose: true,
+                    message: '保存基础关键词成功!',
+                    type: 'success'
+                  })
+                }
               } else {
-                self.$message({
-                  showClose: true,
-                  message: '保存基础关键词失败!',
-                  type: 'error'
-                })
+                if (switchModel) {
+                  self.$message({
+                    showClose: true,
+                    message: '切换模式失败!',
+                    type: 'error'
+                  })
+                } else {
+                  self.$message({
+                    showClose: true,
+                    message: '保存基础关键词失败!',
+                    type: 'error'
+                  })
+                }
               }
-            }
-          })
+            })
+          }
         }
       })
     }

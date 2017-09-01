@@ -147,7 +147,7 @@ body {
 
 /* tab item hover 字体颜色样式 */
 .el-tabs__item:hover {
-  color: #ffff00;
+  color: $dialog-tab-hover-color;
 }
 
 /*  弹出框样式 */
@@ -885,23 +885,21 @@ body {
   .el-dialog {
     background-color: $manage-dialog-bgcolor;
   }
-  .el-form-item {
-    margin-bottom: 20px !important;
-  }
 }
 
 //切换卡样式
 .subject-gl {
   float: left;
   margin-left: 6px;
-  width: 200px;
-  height: 50px;
-  background-color: #0e64a1;
+  width: 170px;
+  height: 45px;
+  background-color: #af7507;
   line-height: 50px;
   font-size: 18px;
   font-weight: 600;
   text-align: left;
   color: #fff;
+  cursor: pointer;
 }
 
 .border-left-top {
@@ -925,33 +923,37 @@ body {
 }
 
 .border-left-bottom {
-  float: left;
   width: 4%;
   height: 10%;
   border-bottom: 1px solid #fff;
   border-left: 1px solid #fff;
+  position: absolute;
+  top: -5px;
 
 }
 
 .border-right-bottom {
-  float: right;
   width: 4%;
   height: 10%;
   border-bottom: 1px solid #fff;
   border-right: 1px solid #fff;
+  position: absolute;
+  top: -5px;
+  left: 162px;
 }
 
 .subject-bg {
   float: left;
-  margin-left: 10px;
-  width: 200px;
-  height: 50px;
-  background-color: #af7507;
+  margin-left: 6px;
+  width: 170px;
+  height: 45px;
+  background-color: #0e64a1;
   line-height: 50px;
   font-size: 18px;
   font-weight: 600;
   text-align: left;
   color: #fff;
+  cursor: pointer;
 }
 
 //搜索按钮样式
@@ -1261,7 +1263,7 @@ body {
       color: $font-color;
       font-size: 20px;
       font-weight: 700;
-      opacity: 0.8;
+      //opacity: 0.8;
     }
     .title {
       color: #ff0000;
@@ -1611,6 +1613,19 @@ body {
   color: $font-color;
 }
 
+/*事故监测--------------------------------------------------*/
+.accidentListBox > div {
+  border-bottom: 1px solid $card-border-color;
+}
+
+#trend-chart{
+  height: 360px;
+}
+
+.isAccidentSelected {
+  color: #f40;
+}
+
 /* @ 综合检测
 ----------------------------------------------------------------*/
 .leader-header {
@@ -1634,5 +1649,358 @@ body {
 
 #areaWarning {
   height: 360px;
+}
+
+/*-----------------------------时间轴样式----------------------------------------------------------*/
+
+.timeline {
+  list-style: none;
+  position: relative;
+  max-width: 1200px;
+  padding: 20px;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.timeline:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  margin-left: -2px;
+  background-color: #d7e4ed;
+  height: 100%;
+  width: 4px;
+  border-radius: 2px;
+  display: block;
+}
+
+.timeline .timeline-row {
+  padding-left: 50%;
+  position: relative;
+  z-index: 10;
+}
+
+.timeline .timeline-row .timeline-time {
+  position: absolute;
+  top: 10px;
+  text-align: right;
+  margin-right: 40px;
+  font-size: 16px;
+  line-height: 1.3;
+  font-weight: 700;
+  color: #fff
+}
+
+.timeline .timeline-row .timeline-time small {
+  display: block;
+  color: white;
+  text-transform: uppercase;
+  opacity: 0.75;
+  font-size: 11px;
+  font-weight: 400;
+}
+
+.timeline .timeline-row .timeline-icon {
+  position: absolute;
+  top: 30px;
+  left: 50%;
+  margin-left: -20px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: white;
+  text-align: center;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  padding: 3px;
+  color: white;
+  font-size: 14px;
+  z-index: 100;
+}
+
+.timeline .timeline-row .timeline-icon > div {
+  border-radius: 50%;
+  line-height: 34px;
+  font-size: 16px;
+}
+
+.timeline .timeline-row .timeline-content {
+  margin-left: 40px;
+  min-height: 100px;
+  position: relative;
+  background-color: white;
+  color: #333333;
+  cursor: pointer;
+}
+
+.timeline .timeline-row .timeline-content:after {
+  content: '';
+  position: absolute;
+  top: 16px;
+  right: 100%;
+  height: 0;
+  width: 0;
+  border: 7px solid transparent;
+  border-right: 7px solid #EBA954;
+}
+
+.timeline .timeline-row .timeline-content .panel-body {
+  padding: 15px 15px 2px;
+  position: relative;
+  z-index: 10;
+}
+
+.timeline .timeline-row .timeline-content h2 {
+  font-size: 22px;
+  margin-bottom: 12px;
+  margin-top: 0;
+  line-height: 1.2;
+}
+
+.timeline .timeline-row .timeline-content p {
+  margin-bottom: 15px;
+}
+
+.timeline .timeline-row .timeline-content img {
+  margin-bottom: 15px;
+}
+
+.timeline .timeline-row .timeline-content blockquote {
+  border-color: #eeeeee;
+}
+
+.timeline .timeline-row .timeline-content blockquote footer, .timeline .timeline-row .timeline-content blockquote small, .timeline .timeline-row .timeline-content blockquote .small, .timeline .timeline-row .timeline-content blockquote.blockquote-reverse footer, .timeline .timeline-row .timeline-content blockquote.blockquote-reverse small, .timeline .timeline-row .timeline-content blockquote.blockquote-reverse .small {
+  color: #999999;
+}
+
+.timeline .timeline-row .timeline-content .video-container {
+  position: relative;
+  padding-bottom: 56.25%;
+  padding-top: 30px;
+  height: 0;
+  margin-bottom: 15px;
+  overflow: hidden;
+}
+
+.timeline .timeline-row .timeline-content .video-container iframe, .timeline .timeline-row .timeline-content .video-container object, .timeline .timeline-row .timeline-content .video-container embed {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.timeline .timeline-row:nth-child(odd) {
+  padding-left: 0;
+  padding-right: 50%;
+}
+
+.timeline .timeline-row:nth-child(odd) .timeline-time {
+  margin-left: 0px;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  text-align: left;
+  color: #fff;
+}
+
+.timeline .timeline-row:nth-child(odd) .timeline-content {
+  margin-right: 40px;
+  margin-left: 0;
+}
+
+.timeline .timeline-row:nth-child(odd) .timeline-content:after {
+  top: 24px;
+  right: auto;
+  left: 100%;
+  border-color: transparent;
+  border-left-color: #65ADB7;
+}
+
+.timeline.animated .timeline-row .timeline-content {
+  //opacity: 0;
+  left: 20px;
+  -webkit-transition: all 0.8s;
+  -moz-transition: all 0.8s;
+  transition: all 0.8s;
+}
+
+.timeline.animated .timeline-row:nth-child(odd) .timeline-content {
+  left: -20px;
+}
+
+.timeline.animated .timeline-row.active .timeline-content {
+  opacity: 1;
+  left: 0;
+}
+
+.timeline.animated .timeline-row.active:nth-child(odd) .timeline-content {
+  left: 20px;
+  width: 80%;
+
+}
+
+.timeline.animated .timeline-row.active:nth-child(odd) .timeline-content {
+  background: #65ADB7;
+}
+
+.timeline.animated .timeline-row.active:nth-child(even) .timeline-content {
+  background: #EBA954;
+  width: 80%;
+}
+
+@media (max-width: 1200px) {
+  .timeline {
+    padding: 15px 10px;
+  }
+
+  .timeline:after {
+    left: 28px;
+  }
+
+  .timeline .timeline-row {
+    padding-left: 0;
+    margin-bottom: 16px;
+  }
+
+  .timeline .timeline-row .timeline-time {
+    position: relative;
+    right: auto;
+    top: 0;
+    text-align: left;
+    margin: 0 0 6px 56px;
+    color: #F0CA45;
+  }
+
+  .timeline .timeline-row .timeline-time strong {
+    display: inline-block;
+    margin-right: 10px;
+  }
+
+  .timeline .timeline-row .timeline-icon {
+    top: 52px;
+    left: -2px;
+    margin-left: 0;
+  }
+
+  .timeline .timeline-row .timeline-content {
+    margin-left: 56px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    position: relative;
+  }
+
+  .timeline .timeline-row .timeline-content:after {
+    right: auto !important;
+    left: -20px !important;
+    top: 32px;
+  }
+
+  .timeline .timeline-row:nth-child(odd) {
+    padding-right: 0;
+  }
+
+  .timeline .timeline-row:nth-child(odd) .timeline-time {
+    position: relative;
+    right: auto;
+    left: auto;
+    top: 0;
+    text-align: left;
+    margin: 0 0 6px 56px;
+    color: #666;
+    font-weight: 700;
+  }
+
+  .timeline .timeline-row:nth-child(odd) .timeline-content {
+    margin-right: 0;
+    margin-left: 55px;
+  }
+
+  .timeline.animated .timeline-row:nth-child(odd) .timeline-content {
+    left: 20px;
+  }
+
+  .timeline.animated .timeline-row.active:nth-child(odd) .timeline-content {
+    left: 0;
+  }
+}
+
+.bg-primary {
+  color: #fff;
+  background-color: #428bca
+}
+
+a.bg-primary:hover {
+  background-color: #3071a9
+}
+
+.panel {
+  margin-bottom: 20px;
+  background-color: #fff;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, .05)
+}
+
+.panel-body {
+  padding: 15px
+}
+
+.fa {
+  display: inline-block;
+  font-family: FontAwesome;
+  font-style: normal;
+  font-weight: normal;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.fa-pencil:before {
+  content: "\f040";
+}
+
+.timeline .timeline-row .timeline-content .title {
+  font-size: 14px;
+  position: absolute;
+  top: 40px;
+  color: #fff
+}
+
+.cd-timeline-img {
+  position: absolute;
+  top: 26px;
+  left: 47.2%;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  box-shadow: 0 0 0 4px #ffffff, inset 0 2px 0 rgba(0, 0, 0, 0.08), 0 3px 0 4px rgba(0, 0, 0, 0.05);
+}
+
+.cd-timeline-img.cd-location {
+  background: #65ADB7;
+}
+
+.timeline.animated .timeline-row.active:nth-child(even) .cd-timeline-img.cd-location {
+  background: #EBA954;
+}
+
+.similar {
+  color: #ccc;
+  font-size: 14px;
+  font-family: "微软雅黑";
+}
+
+#netizenGuess {
+  height: 300px;
+}
+
+#netizenEmotion {
+  height: 300px;
+}
+
+#netizenHotkeyword {
+  height: 300px;
 }
 

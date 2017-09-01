@@ -23,7 +23,9 @@ const leaderKeywords = r => require.ensure([], () => r(require('../page/setting/
 const industryKeywords = r => require.ensure([], () => r(require('../page/setting/industry-keywords')), 'industryKeywords')
 const accidentKeywords = r => require.ensure([], () => r(require('../page/setting/accident-keywords')), 'accidentKeywords')
 const contacts = r => require.ensure([], () => r(require('../page/setting/contacts')), 'contacts')
-const leaderYuqing = r => require.ensure([], () => r(require('../page/setting/leader-yuqing')), 'leaderYuqing')
+const leaderYuqing = r => require.ensure([], () => r(require('../page/leaderYuqing/index')), 'leaderYuqing')
+const leaderWarning = r => require.ensure([], () => r(require('../page/setting/leader-warning')), 'leaderWarning')
+const leaderKeywordsZj = r => require.ensure([], () => r(require('../page/setting/leader-keywordszj')), 'leaderKeywordsZj')
 const monthlyReport = r => require.ensure([], () => r(require('../page/setting/monthly-report')), 'monthlyReport')
 const weeklyReport = r => require.ensure([], () => r(require('../page/setting/weekly-report')), 'weeklyReport')
 const detail = r => require.ensure([], () => r(require('../page/detail/index')), 'detail')
@@ -146,6 +148,17 @@ export default [
   {
     path: '/',
     component: home,
+    name: '综合监测',
+    menuShow: true,
+    leaf: true, // 只有一个节点
+    iconCls: 'iconfont icon-thesaurus', // 图标样式class
+    children: [
+      {path: '/leaderYuqing', component: leaderYuqing, name: '综合监测', menuShow: true}
+    ]
+  },
+  {
+    path: '/',
+    component: home,
     name: '我的收藏 ',
     menuShow: true,
     leaf: true, // 只有一个节点
@@ -161,13 +174,14 @@ export default [
     menuShow: true,
     iconCls: 'iconfont icon-manage', // 图标样式class
     children: [
-      {path: '/keywords', component: keywords, name: '关键词设置', menuShow: true},
+      {path: '/keywords', component: keywords, name: '基础关键词设置', menuShow: true},
       {path: '/focusKeywords', component: focusKeywords, name: '焦点关键词设置', menuShow: true},
       {path: '/leaderKeywords', component: leaderKeywords, name: '领导关键词设置', menuShow: true},
       {path: '/industryKeywords', component: industryKeywords, name: '行业关键词设置', menuShow: true},
       {path: '/accidentKeywords', component: accidentKeywords, name: '事故关键词设置', menuShow: true},
       {path: '/contacts', component: contacts, name: '联系人设置', menuShow: true},
-      {path: '/leaderYuqing', component: leaderYuqing, name: '综合监测', menuShow: true},
+      {path: '/leaderKeywordsZj', component: leaderKeywordsZj, name: '领导新闻关键词设置', menuShow: true},
+      {path: '/leaderWarning', component: leaderWarning, name: '领导预警设置', menuShow: true},
       {path: '/monthlyReport', component: monthlyReport, name: '月报设置', menuShow: true},
       {path: '/weeklyReport', component: weeklyReport, name: '周报设置', menuShow: true}
     ]

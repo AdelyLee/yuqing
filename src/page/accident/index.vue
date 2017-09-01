@@ -650,7 +650,7 @@
         height: 35px;
         position: absolute;
         top: 114px;
-        right: -15px;
+        left: 1014px;
       }
     }
     .tit {
@@ -667,7 +667,7 @@
       font-weight: 700;
     }
     .subject-gl {
-      width: 180px;
+      width: 170px;
       color: #fff;
     }
     .img {
@@ -693,8 +693,8 @@
     }
     .content-all {
       position: absolute;
-      right: 17%;
-      bottom: 25%;
+      right: 15%;
+      bottom: 22%;
     }
   }
 </style>
